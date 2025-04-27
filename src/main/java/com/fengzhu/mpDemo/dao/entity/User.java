@@ -1,4 +1,4 @@
-package com.fengzhu.mpDemo.entity;
+package com.fengzhu.mpDemo.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
@@ -19,8 +19,10 @@ public class User {
     @TableField("name")
     private String name;
 
+    @TableField("age")
     private Integer age;
 
+    @TableField("email")
     private String email;
 
     @TableField(fill = FieldFill.INSERT)

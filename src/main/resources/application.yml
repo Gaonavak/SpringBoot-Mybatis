@@ -1,13 +1,37 @@
+# Server Config
+server:
+  port: 10086
+  servlet:
+    context-path: /dev
+    session:
+      timeout: PT60M
+
 # DataSource Config
 spring:
   application:
     name: mp-demo
   datasource:
-    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/demo?characterEncoding=utf-8
     username: root
-    password:
+    password: 123456
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 180000
+      connection-timeout: 30000
+      pool-name: HikariCP
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 123456
+      connect-timeout: 5000
+      database: 0
 
 
+# Mabatis-plus Config
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/**/*.xml
+  typeAliasesPackage: com.fengzhu.mpDemo.entity

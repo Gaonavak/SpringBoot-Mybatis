@@ -4,24 +4,23 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.fengzhu.mpDemo.entity.User;
+import com.fengzhu.mpDemo.dao.entity.User;
 import com.fengzhu.mpDemo.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 @SpringBootTest
+@ComponentScan(basePackages = "com.fengzhu.mpDemo")
 class MpDemoApplicationTests {
 
-	@Autowired
+    @Autowired
     private UserMapper userMapper;
 
     @Test
@@ -109,13 +108,16 @@ class MpDemoApplicationTests {
 
     @Test
     void testVersion() {
-        concurrentUpdate();
+//        concurrentUpdate();
+
+        System.out.println("I coming");
     }
 
     @Transactional
+    @Test
     void concurrentUpdate() {
-        User user1 = userMapper.selectById(27L);
-        User user2 = userMapper.selectById(27L);
+        User user1 = userMapper.selectById(1L);
+        User user2 = userMapper.selectById(1L);
 
         user1.setEmail("1@a.com");
         userMapper.updateById(user1);
@@ -128,8 +130,6 @@ class MpDemoApplicationTests {
             System.out.println("update success");
         }
     }
-
-
 
 
 }
